@@ -15,7 +15,7 @@ public class FreecamMixin {
     @Shadow private static boolean freecamEnabled;
     @Shadow private static boolean tripodEnabled;
 
-    @Unique private static boolean wasFrozenBefore;
+    @Unique private static boolean freecamWorldFreeze$wasFrozenBefore;
 
     @Inject(method = "toggle", at = @At("RETURN"))
     private static void toggle(CallbackInfo ci) {
@@ -25,10 +25,10 @@ public class FreecamMixin {
 
         // Don't freeze when using the tripod thing.
         if (freecamEnabled && !tripodEnabled) {
-            wasFrozenBefore = server.tickRateManager().isFrozen();
+            freecamWorldFreeze$wasFrozenBefore = server.tickRateManager().isFrozen();
             server.tickRateManager().setFrozen(true);
         } else {
-            server.tickRateManager().setFrozen(wasFrozenBefore);
+            server.tickRateManager().setFrozen(freecamWorldFreeze$wasFrozenBefore);
         }
     }
 }
