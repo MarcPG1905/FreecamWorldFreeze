@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "${modId}",
+  "version": "${modVersion}",
+
+  "name": "${modName}",
+  "description": "${modDescription}",
+  "authors": [ "MarcPG" ],
+  "icon": "icon.png",
+  "license": "MIT",
+
+  "contact": {
+    "sources": "${modGitHubUrl}",
+    "issues": "${modGitHubUrl}/issues"
+  },
+
+  "environment": "client",
+
+  "mixins": [
+    {
+      "config": "${modId}.mixins.json",
+      "environment": "client"
+    }
+  ],
+
+  "depends": {
+    "minecraft": ">=${minMinecraftVersion}",
+    "fabricloader": "*",
+    "freecam":"*"
+  },
+
+  "recommends": { "modmenu":"*" },
+
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/HvWhqY3kRG",
+        "modmenu.modrinth": "https://modrinth.com/mod/fwf",
+        "modmenu.github_releases": "${modGitHubUrl}/releases"
+      }
+    }
+  }
+}

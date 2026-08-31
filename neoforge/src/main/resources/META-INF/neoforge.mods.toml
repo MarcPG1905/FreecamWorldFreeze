@@ -1,0 +1,45 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+issueTrackerURL = "${modGitHubUrl}/issues"
+clientSideOnly = true
+
+[[mods]]
+modId = "${modId}"
+version = "${modVersion}"
+displayName = "${modName}"
+displayURL = "${modGitHubUrl}"
+authors = "MarcPG"
+description = """
+${modDescription}
+"""
+
+bannerFile = "icon.png"
+iconFile = "icon.png"
+iconBlur = true
+logoFile = "icon.png"
+logoBlur = true
+
+[[mixins]]
+config = "${modId}.mixins.json"
+
+[[dependencies.${modId}]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minMinecraftVersion},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "neoforge"
+type = "required"
+versionRange = "[1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "freecam"
+type = "required"
+versionRange = "[1,)"
+ordering = "AFTER"
+side = "CLIENT"
