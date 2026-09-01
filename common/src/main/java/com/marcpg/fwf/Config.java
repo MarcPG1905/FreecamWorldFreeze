@@ -1,0 +1,161 @@
+package com.marcpg.fwf;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
+import net.minecraft.client.gui.components.AbstractSliderButton;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.StringWidget;
+import net.minecraft.client.gui.components.toasts.SystemToast;
+import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
+import net.minecraft.client.gui.layouts.LayoutSettings;
+import net.minecraft.client.gui.layouts.LinearLayout;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.xolt.freecam.Freecam;
+import org.jetbrains.annotations.Contract;
+import org.jspecify.annotations.NonNull;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
+
+public final class Config {
+    public float tickSpeed = 0f;
+    public boolean enabled = true;
+
+    public void toggleEnabled() {
+        if (!Freecam.isEnabled())
+            return; // Don't toggle if not in the freecam.
+
+        enabled = !enabled;
+        FreezeManager.updateAll();
+
+        Component feature = Component.translatable("options.freecam_wf.enabled.toast." + (tickSpeed > 0f ? "slow-mo" : "freeze"));
+        Minecraft.getInstance().gui.toastManager().addToast(new SystemToast(
+                SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
+                Component.translatable("options.freecam_wf.enabled.toast.title", feature),
+                Component.translatable("options.freecam_wf.enabled.toast.message." + enabled, feature)
+        ));
+    }
+
+    public void saveConfig() {
+        try {
+            Files.writeString(FreecamWF.configFile(), tickSpeed + "\n" + enabled);
+        } catch (IOException e) {
+            FreecamWF.logger().error("Could not save config file", e);
+        }
+    }
+
+    public void loadConfig() {
+        if (Files.notExists(FreecamWF.configFile()))
+            return;
+
+        try {
+            List<String> lines = Files.readAllLines(FreecamWF.configFile());
+            tickSpeed = Float.parseFloat(lines.get(0));
+            enabled = Boolean.parseBoolean(lines.get(1));
+        } catch (IOException | NumberFormatException e) {
+            FreecamWF.logger().error("Could not read config file", e);
+        }
+    }
+
+    public static class ConfigScreen extends Screen {
+        private static final Component TITLE = Component.translatable("options.freecam_wf.title");
+
+        private final Screen parent;
+        private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this, 61, 33);
+
+        public ConfigScreen(Screen parent) {
+            super(Component.translatable("options.freecam_wf.title"));
+            this.parent = parent;
+        }
+
+        @Override
+        protected void init() {
+            // Header
+            LinearLayout header = this.layout.addToHeader(LinearLayout.vertical().spacing(8));
+            header.addChild(new StringWidget(TITLE, this.font), LayoutSettings::alignHorizontallyCenter);
+
+            // Contents
+            this.layout.addToContents(new TimeFactorSlider(
+                    width / 2 - 110, height / 2 - 10,
+                    220, 20,
+                    FreecamWF.config().tickSpeed
+            ));
+
+            // Footer
+            this.layout.addToFooter(Button.builder(CommonComponents.GUI_DONE, _ -> this.onClose()).width(200).build());
+
+            // Apply the layout
+            this.layout.visitWidgets(this::addRenderableWidget);
+            this.repositionElements();
+        }
+
+        @Override
+        protected void repositionElements() {
+            this.layout.arrangeElements();
+        }
+
+        @Override
+        public void onClose() {
+            minecraft.setScreenAndShow(parent);
+        }
+
+        public static final class TimeFactorSlider extends AbstractSliderButton {
+            private static final Component CAPTION = Component.translatable("options.freecam_wf.factor");
+
+            private static final float[] TPS_LIST = { 0f, 1f, 2f, 3f, 4f, 5f, 6.67f, 10f, 15f, 20f };
+
+            public TimeFactorSlider(int x, int y, int width, int height, float initialTicks) {
+                super(x, y, width, height, Component.empty(), indexOf(initialTicks) / (double) (TPS_LIST.length - 1));
+                updateMessage();
+            }
+
+            private static int indexOf(float ticks) {
+                int closest = 0;
+                float closestDiff = Float.MAX_VALUE;
+                for (int i = 0; i < TPS_LIST.length; i++) {
+                    float diff = Math.abs(TPS_LIST[i] - ticks);
+                    if (diff < closestDiff) {
+                        closestDiff = diff;
+                        closest = i;
+                    }
+                }
+                return closest;
+            }
+
+            @Override
+            protected void setValue(double newValue) {
+                int index = (int) Math.round(newValue * (TPS_LIST.length - 1));
+                super.setValue((double) index / (TPS_LIST.length - 1));
+            }
+
+            @Override
+            protected void updateMessage() {
+                float ticks = getTicks();
+                setMessage(Options.genericValueLabel(CAPTION, switch ((int) ticks) {
+                    case 0 -> Component.translatable("options.freecam_wf.factor.0");
+                    case 20 -> Component.translatable("options.freecam_wf.factor.20");
+                    default -> Component.literal(formatSpeed(ticks));
+                }));
+            }
+
+            @Override
+            protected void applyValue() {
+                FreecamWF.config().tickSpeed = getTicks();
+                FreezeManager.updateAll();
+            }
+
+            private float getTicks() {
+                int index = (int) Math.round(value * (TPS_LIST.length - 1));
+                return TPS_LIST[index];
+            }
+
+            @Contract(pure = true)
+            private static @NonNull String formatSpeed(float ticks) {
+                return ((float) Math.round(ticks / 20f * 100f * 10f) / 10f) + "%";
+            }
+        }
+    }
+}

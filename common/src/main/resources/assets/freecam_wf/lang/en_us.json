@@ -1,0 +1,14 @@
+{
+  "key.category.freecam_wf.main": "Freecam World Freeze",
+  "key.freecam_wf.toggle": "Toggle Freeze/Slow-Motion",
+  "options.freecam_wf.title": "Freecam World Freeze Config",
+  "options.freecam_wf.factor": "Time Factor",
+  "options.freecam_wf.factor.0": "Frozen (Default)",
+  "options.freecam_wf.factor.20": "No Effect",
+  "options.freecam_wf.factor.other": "%s ticks (%s)",
+  "options.freecam_wf.enabled.toast.title": "Freecam %s Toggled",
+  "options.freecam_wf.enabled.toast.message.true": "%s is now turned on.",
+  "options.freecam_wf.enabled.toast.message.false": "%s is now turned off.",
+  "options.freecam_wf.enabled.toast.freeze": "Freezing",
+  "options.freecam_wf.enabled.toast.slow-mo": "Slow-Motion"
+}

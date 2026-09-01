@@ -12,5 +12,7 @@ repositories {
 dependencies {
     minecraft("com.mojang:minecraft:26.2")
     compileOnly("org.spongepowered:mixin:0.8.7")
-    compileOnlyApi("maven.modrinth:XeEZ3fK2:2hsFARvZ")
+
+    // Fabric version - doesn't really matter, just need the base API.
+    compileOnlyApi("maven.modrinth:XeEZ3fK2:OqDcTeQ8")
 }

@@ -16,6 +16,11 @@
 
   "environment": "client",
 
+  "entrypoints": {
+    "client": [ "com.marcpg.fwf.FWFFabric" ],
+    "modmenu": [ "com.marcpg.fwf.ModMenuIntegration" ]
+  },
+
   "mixins": [
     {
       "config": "${modId}.mixins.json",
@@ -35,7 +40,7 @@
     "modmenu": {
       "links": {
         "modmenu.discord": "https://discord.gg/HvWhqY3kRG",
-        "modmenu.modrinth": "https://modrinth.com/mod/fwf",
+        "modmenu.modrinth": "https://modrinth.com/mod/freecam-wf",
         "modmenu.github_releases": "${modGitHubUrl}/releases"
       }
     }
