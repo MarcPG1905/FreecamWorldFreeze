@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public final class Config {
+public final class FWFConfig {
     public float tickSpeed = 0f;
     public boolean enabled = true;
 
@@ -29,7 +29,7 @@ public final class Config {
             return; // Don't toggle if not in the freecam.
 
         enabled = !enabled;
-        FreezeManager.updateAll();
+        EffectManager.updateAll();
 
         Component feature = Component.translatable("options.freecam_wf.enabled.toast." + (tickSpeed > 0f ? "slow-mo" : "freeze"));
         Minecraft.getInstance().gui.toastManager().addToast(new SystemToast(
@@ -144,7 +144,7 @@ public final class Config {
             @Override
             protected void applyValue() {
                 FreecamWF.config().tickSpeed = getTicks();
-                FreezeManager.updateAll();
+                EffectManager.updateAll();
             }
 
             private float getTicks() {

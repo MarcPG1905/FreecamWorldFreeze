@@ -17,17 +17,17 @@ public final class FreecamWF {
 
     private static Path configFile;
     private static Logger logger;
-    private static Config config;
+    private static FWFConfig config;
 
     public static Path configFile() { return configFile; }
     public static Logger logger() { return logger; }
-    public static Config config() { return config; }
+    public static FWFConfig config() { return config; }
 
     public static void setup(Path configDir, Logger logger) {
         FreecamWF.configFile = configDir.resolve(MOD_ID + ".txt");
         FreecamWF.logger = logger;
 
-        FreecamWF.config = new Config();
+        FreecamWF.config = new FWFConfig();
         FreecamWF.config.loadConfig();
     }
 }

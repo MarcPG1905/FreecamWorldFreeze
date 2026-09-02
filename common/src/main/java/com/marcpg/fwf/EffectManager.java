@@ -5,7 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.TickRateManager;
 import net.xolt.freecam.Freecam;
 
-public final class FreezeManager {
+public final class EffectManager {
     private static int previousFrozen = -1;
     private static boolean modifiedFrozen = false;
 

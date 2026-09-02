@@ -23,7 +23,7 @@ public final class FWFNeoForge {
         FreecamWF.setup(FMLPaths.CONFIGDIR.get(), LogUtils.getLogger());
 
         // Configuration screen
-        container.registerExtensionPoint(IConfigScreenFactory.class, (_, parent) -> new Config.ConfigScreen(parent));
+        container.registerExtensionPoint(IConfigScreenFactory.class, (_, parent) -> new FWFConfig.ConfigScreen(parent));
     }
 
     @SubscribeEvent
