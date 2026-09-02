@@ -1,13 +1,11 @@
 plugins {
-    id("net.neoforged.gradle.userdev") version "7.1.38"
+    alias(libs.plugins.neoforge)
 }
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 dependencies {
     implementation(project(":common"))
 
-    implementation("net.neoforged:neoforge:26.2.0.75")
+    implementation(libs.neoforge)
 }
 
 sourceSets.main.configure {

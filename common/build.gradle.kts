@@ -1,6 +1,6 @@
 plugins {
     id("java-library")
-    id("net.fabricmc.fabric-loom") version "1.17-SNAPSHOT"
+    alias(libs.plugins.loom)
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)
@@ -10,8 +10,8 @@ repositories {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:26.2")
-    compileOnly("org.spongepowered:mixin:0.8.7")
+    minecraft(libs.minecraft)
+    compileOnly(libs.mixin)
 
     // Fabric version - doesn't really matter, just need the base API.
     compileOnlyApi("maven.modrinth:XeEZ3fK2:OqDcTeQ8")

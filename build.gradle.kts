@@ -12,6 +12,22 @@ extra["minMinecraftVersion"] = "1.20.3"
 allprojects {
     group = "com.marcpg"
     version = rootProject.extra["modVersion"] as String
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+
+        // So all dependencies can be located by both Gradle and the version catalogue updater.
+        maven("https://maven.fabricmc.net/")
+        maven("https://maven.neoforged.net/releases/")
+        maven("https://maven.terraformersmc.com/releases/")
+        maven("https://repo.spongepowered.org/maven/")
+
+        exclusiveContent {
+            forRepository { maven("https://api.modrinth.com/maven") }
+            filter { includeGroup("maven.modrinth") }
+        }
+    }
 }
 
 val childJars = configurations.create("childJars") {
@@ -44,15 +60,7 @@ subprojects {
     @Suppress("AvoidApplyPluginMethod")
     apply(plugin = "java")
 
-    repositories {
-        mavenLocal()
-        mavenCentral()
-
-        exclusiveContent {
-            forRepository { maven("https://api.modrinth.com/maven") }
-            filter { includeGroup("maven.modrinth") }
-        }
-    }
+    java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
     tasks.processResources {
         val properties = rootProject.extra.properties.mapValues { it.value.toString() }

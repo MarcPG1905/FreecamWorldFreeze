@@ -1,0 +1,21 @@
+[versions]
+fabric-api = "0.158.0+26.2"
+fabric-loader = "0.19.3"
+loom = "1.17-SNAPSHOT"
+minecraft = "26.2"
+mixin = "0.8.7"
+modmenu = "20.0.1"
+neoforge = "26.2.0.75"
+neoforge-plugin = "7.1.38"
+
+[plugins]
+loom = { id = "net.fabricmc.fabric-loom", version.ref = "loom" }
+neoforge = { id = "net.neoforged.gradle.userdev", version.ref = "neoforge-plugin" }
+
+[libraries]
+fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
+fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+mixin = { module = "org.spongepowered:mixin", version.ref = "mixin" }
+modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
+neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
