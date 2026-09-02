@@ -1,10 +1,10 @@
 # Freecam World Freeze
 
-Extension to [the Freecam mod](https://modrinth.com/mod/freecam) which freezes the world when the freecam is activated.
+Extension to [the Freecam mod](https://modrinth.com/mod/freecam) which freezes or slows down the world when the freecam is activated.
 
 > **Freecam (or a derivative of it) is required for this mod to run!**
 
-By default, only the world is frozen and the player keeps moving.  
+By default when the extension is set to freeze, only the world is frozen and the player keeps moving.  
 You can **enable `Freeze Player` in Freecam's options to also freeze the player**.
 
 ## Installation
@@ -19,16 +19,32 @@ Now, you can **download this mod** and drop it into your `./mods/` folder aswell
 
 That's it! You can **start Minecraft and enjoy the mod/extension**.
 
-## Future Plans
+## Features
 
-Some further optional features will be added soon:
+### Configure Freeze/Slow-Motion
 
-- Add a keybind for players who want to **toggle the freezing while in freecam**.
-- Put the game in **slow-motion** instead of freezing it.
+Using the **mod menu** of your platform (on Fabric, you need to install "Mod Menu" for this), you can access the extension's **configuration screen**.  
+There, you can slide the slider for three different modes:
+
+1. **Left:** Freeze the world
+2. **Middle:** Slow down the world (configurable intensity)
+3. **Right:** Do nothing (not recommended)
+
+### Toggle the Extension while in Freecam
+
+**The default key to toggle is `F6`.**
+> This can be modified in Minecraft's keybind settings.
+
+Pressing the set key will **enable or disable the freeze/slow-motion** in your world.
+
+## Planned Features
+
+- Integration with other popular freecam mods.
 
 ## How this mod works
 
-This mod works primarily using the same functionality powering `/tick freeze` and `/tick unfreeze`, but hooks into the Freecam mod to automatically do this whenever the freecam is used.
+This mod works the same functionality that the `/tick` commands use under the hood, but hooks into the Freecam mod to automatically do this whenever using the freecam.
+In addition to this, it will keep track of previous values to not override any manual usage of the `/tick` command, and it handles all possible side cases, configuration, etc. for you.
 
 ## Contact
 
