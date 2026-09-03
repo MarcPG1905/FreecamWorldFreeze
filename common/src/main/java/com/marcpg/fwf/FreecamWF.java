@@ -1,5 +1,6 @@
 package com.marcpg.fwf;
 
+import com.marcpg.fwf.compat.FreecamImplManager;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
@@ -29,5 +30,7 @@ public final class FreecamWF {
 
         FreecamWF.config = new FWFConfig();
         FreecamWF.config.loadConfig();
+
+        FreecamImplManager.init();
     }
 }

@@ -1,9 +1,9 @@
 package com.marcpg.fwf;
 
+import com.marcpg.fwf.compat.FreecamImplManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.TickRateManager;
-import net.xolt.freecam.Freecam;
 
 public final class EffectManager {
     private static int previousFrozen = -1;
@@ -23,7 +23,7 @@ public final class EffectManager {
     }
 
     public static void updateFrozenStatus(TickRateManager trm) {
-        if (Freecam.isEnabled() && FreecamWF.config().enabled && FreecamWF.config().tickSpeed <= 0f) {
+        if (FreecamImplManager.isEnabled() && FreecamWF.config().enabled && FreecamWF.config().tickSpeed <= 0f) {
             if (previousFrozen == -1)
                 previousFrozen = trm.isFrozen() ? 1 : 0;
 
@@ -40,7 +40,7 @@ public final class EffectManager {
 
     public static void updateTickrateStatus(TickRateManager trm) {
         float targetTickSpeed = FreecamWF.config().tickSpeed;
-        if (Freecam.isEnabled() && FreecamWF.config().enabled && targetTickSpeed > 0f && targetTickSpeed < 20f) {
+        if (FreecamImplManager.isEnabled() && FreecamWF.config().enabled && targetTickSpeed > 0f && targetTickSpeed < 20f) {
             if (previousTickrate == -1)
                 previousTickrate = trm.tickrate();
 

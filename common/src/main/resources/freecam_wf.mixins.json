@@ -3,7 +3,7 @@
   "package": "com.marcpg.fwf.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
-    "FreecamMixin"
+    "XoltMixin",
   ],
   "injectors": {
     "defaultRequire": 1

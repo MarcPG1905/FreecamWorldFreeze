@@ -1,14 +1,13 @@
 package com.marcpg.fwf.mixin;
 
 import com.marcpg.fwf.EffectManager;
-import net.xolt.freecam.Freecam;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(Freecam.class)
-public class FreecamMixin {
+@Mixin(net.xolt.freecam.Freecam.class)
+public class XoltMixin {
     @Inject(method = "toggle", at = @At("RETURN"))
     private static void toggle(CallbackInfo ci) {
         EffectManager.updateAll();
