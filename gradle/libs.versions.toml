@@ -1,10 +1,10 @@
 [versions]
+asm = "9.10.1"
 fabric-api = "0.158.0+26.2"
 fabric-loader = "0.19.3"
 loom = "1.17-SNAPSHOT"
 minecraft = "26.2"
 mixin = "0.8.7"
-asm = "9.10.1"
 modmenu = "20.0.1"
 neoforge = "26.2.0.75"
 neoforge-plugin = "7.1.38"
@@ -14,10 +14,10 @@ loom = { id = "net.fabricmc.fabric-loom", version.ref = "loom" }
 neoforge = { id = "net.neoforged.gradle.userdev", version.ref = "neoforge-plugin" }
 
 [libraries]
+asm-tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
 fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 mixin = { module = "org.spongepowered:mixin", version.ref = "mixin" }
-asm-tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }

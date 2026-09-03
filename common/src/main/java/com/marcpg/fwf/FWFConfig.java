@@ -10,6 +10,7 @@ import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.layouts.LayoutSettings;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.xolt.freecam.Freecam;
@@ -29,6 +30,7 @@ public final class FWFConfig {
             return; // Don't toggle if not in the freecam.
 
         enabled = !enabled;
+        FreecamWF.config().saveConfig();
         EffectManager.updateAll();
 
         Component feature = Component.translatable("options.freecam_wf.enabled.toast." + (tickSpeed > 0f ? "slow-mo" : "freeze"));
@@ -145,6 +147,11 @@ public final class FWFConfig {
             protected void applyValue() {
                 FreecamWF.config().tickSpeed = getTicks();
                 EffectManager.updateAll();
+            }
+
+            @Override
+            public void onRelease(@NonNull MouseButtonEvent event) {
+                FreecamWF.config().saveConfig();
             }
 
             private float getTicks() {

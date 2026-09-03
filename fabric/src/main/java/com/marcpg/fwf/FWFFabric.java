@@ -1,7 +1,6 @@
 package com.marcpg.fwf;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.loader.api.FabricLoader;
@@ -15,9 +14,6 @@ public final class FWFFabric implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         FreecamWF.setup(FabricLoader.getInstance().getConfigDir(), LoggerFactory.getLogger(FreecamWF.MOD_ID));
-
-        // Save configuration when closing
-        ClientLifecycleEvents.CLIENT_STOPPING.register(_ -> FreecamWF.config().saveConfig());
 
         // Freeze key pressing
         ClientTickEvents.END_CLIENT_TICK.register(_ -> {

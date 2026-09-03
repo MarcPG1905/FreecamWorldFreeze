@@ -10,7 +10,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.event.lifecycle.ClientStoppingEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.util.Lazy;
 
@@ -26,23 +25,6 @@ public final class FWFNeoForge {
         container.registerExtensionPoint(IConfigScreenFactory.class, (_, parent) -> new FWFConfig.ConfigScreen(parent));
     }
 
-    @SubscribeEvent
-    public void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
-        event.registerCategory(CATEGORY);
-        event.register(TOGGLE_FREEZE_KEY.get());
-    }
-
-    @SubscribeEvent // Save configuration when closing
-    public void onClientStopping(ClientStoppingEvent event) {
-        FreecamWF.config().saveConfig();
-    }
-
-    @SubscribeEvent
-    public void onClientTickPost(ClientTickEvent.Post event) {
-        while (TOGGLE_FREEZE_KEY.get().consumeClick())
-            FreecamWF.config().toggleEnabled();
-    }
-
     @EventBusSubscriber(modid = "freecam_wf", value = Dist.CLIENT)
     static final class ModBusEvents {
         @SubscribeEvent
@@ -54,11 +36,6 @@ public final class FWFNeoForge {
 
     @EventBusSubscriber(modid = "freecam_wf", value = Dist.CLIENT)
     static final class GameBusEvents {
-        @SubscribeEvent
-        static void onClientStopping(ClientStoppingEvent event) {
-            FreecamWF.config().saveConfig();
-        }
-
         @SubscribeEvent
         static void onClientTickPost(ClientTickEvent.Post event) {
             while (TOGGLE_FREEZE_KEY.get().consumeClick())
