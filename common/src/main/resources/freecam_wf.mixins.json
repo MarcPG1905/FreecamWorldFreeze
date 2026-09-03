@@ -2,6 +2,7 @@
   "required": true,
   "package": "com.marcpg.fwf.mixin",
   "compatibilityLevel": "JAVA_25",
+  "plugin": "com.marcpg.fwf.compat.MixinConfigPlugin",
   "mixins": [
     "CamEnhanceMixin",
     "CamTweaksMixin",
