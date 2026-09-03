@@ -4,7 +4,7 @@ plugins {
 
 extra["modId"] = "freecam_wf"
 extra["modName"] = "Freecam World Freeze"
-extra["modVersion"] = "1.1.0"
+extra["modVersion"] = "1.2.0"
 extra["modDescription"] = "Freezes/pauses or slows down your singleplayer world while in freecam."
 extra["modGitHubUrl"] = "https://github.com/MarcPG1905/FreecamWorldFreeze"
 extra["minMinecraftVersion"] = "1.20.3"

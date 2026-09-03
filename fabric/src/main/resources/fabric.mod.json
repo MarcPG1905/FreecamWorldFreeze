@@ -31,10 +31,21 @@
   "depends": {
     "minecraft": ">=${minMinecraftVersion}",
     "fabricloader": "*",
-    "freecam":"*"
+    "freecam": "*"
   },
 
-  "recommends": { "modmenu":"*" },
+  "recommends": {
+    "modmenu": "*",
+
+    "camenh": "*",
+    "cameratweaks": "*",
+    "easy-freecam": "*",
+    "freecam": "*",
+    "freecam_by_jasonzli": "*",
+    "freecam_by_kapiteon": "*",
+    "wi_freecam": "*",
+    "zergatulfreecam": "*"
+  },
 
   "custom": {
     "modmenu": {

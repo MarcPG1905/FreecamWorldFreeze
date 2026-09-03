@@ -39,7 +39,28 @@ side = "BOTH"
 
 [[dependencies.${modId}]]
 modId = "freecam"
-type = "required"
+type = "optional"
+versionRange = "[1,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies.${modId}]]
+modId = "freecam_by_jasonzli"
+type = "optional"
+versionRange = "[1,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies.${modId}]]
+modId = "freecam_by_kapiteon"
+type = "optional"
+versionRange = "[1,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies.${modId}]]
+modId = "zergatulfreecam"
+type = "optional"
 versionRange = "[1,)"
 ordering = "AFTER"
 side = "CLIENT"
