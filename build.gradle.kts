@@ -44,6 +44,7 @@ val childJars = configurations.create("childJars") {
 dependencies {
     add(childJars.name, project(":common"))
     add(childJars.name, project(":fabric"))
+    add(childJars.name, project(":forge"))
     add(childJars.name, project(":neoforge"))
 }
 
@@ -58,6 +59,10 @@ tasks {
         from(childJars.map(::zipTree))
 
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+        manifest { // For Forge
+            attributes["MixinConfigs"] = "freecam_wf.mixins.json"
+        }
     }
 }
 
@@ -70,7 +75,7 @@ subprojects {
     tasks.processResources {
         val properties = rootProject.extra.properties.mapValues { it.value.toString() }
         inputs.properties(properties)
-        filesMatching(listOf("fabric.mod.json", "META-INF/neoforge.mods.toml")) {
+        filesMatching(listOf("fabric.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml")) {
             expand(properties)
         }
     }

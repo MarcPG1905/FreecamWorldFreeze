@@ -1,0 +1,61 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+issueTrackerURL = "${modGitHubUrl}/issues"
+clientSideOnly = true
+
+[[mods]]
+modId = "${modId}"
+version = "${modVersion}"
+displayName = "${modName}"
+displayURL = "${modGitHubUrl}"
+authors = "MarcPG"
+description = '''${modDescription}'''
+
+logoFile = "icon.png"
+logoBlur = true
+
+[[mixins]]
+config = "${modId}.mixins.json"
+
+[[dependencies.${modId}]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[${minMinecraftVersion},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "forge"
+mandatory = true
+versionRange = "[1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "freecam"
+mandatory = false
+versionRange = "[1,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies.${modId}]]
+modId = "freecam_by_jasonzli"
+mandatory = false
+versionRange = "[1,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies.${modId}]]
+modId = "freecam_by_kapiteon"
+mandatory = false
+versionRange = "[1,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies.${modId}]]
+modId = "zergatulfreecam"
+mandatory = false
+versionRange = "[1,)"
+ordering = "AFTER"
+side = "CLIENT"
