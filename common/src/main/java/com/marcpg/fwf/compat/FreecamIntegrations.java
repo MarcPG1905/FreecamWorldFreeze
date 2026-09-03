@@ -6,7 +6,14 @@ public final class FreecamIntegrations {
     private FreecamIntegrations() {}
 
     public static final List<Integration> AVAILABLE = List.of(
-            new Integration("Freecam", "net.xolt.freecam.Freecam", "Xolt")
+            new Integration("Freecam", "net.xolt.freecam.Freecam", "Xolt"),
+            new Integration("FreeCamMc", "com.jasonzli.freecam.FreeCam", "FreeCamMc"),
+            new Integration("Camera Tweaks", "cameratweaks.Freecam", "CamTweaks"),
+            new Integration("Camera Enhancements", "me.syflog.camenh.Freecam", "CamEnhance"),
+            new Integration("Easy Freecam", "dev.elpu7.easyFreecam.client.FreecamController", "EasyFreecam"),
+            new Integration("WI Freecam", "net.wimods.freecam.WiFreecam", "Wurst"),
+            new Integration("FreeCam by kapiteon", "com.kapiteon.freecam.FreeCam", "Kapiteon"),
+            new Integration("FreeCam by Zergatul", "com.zergatul.freecam.FreeCam", "Zergatul")
     );
 
     public record Integration(

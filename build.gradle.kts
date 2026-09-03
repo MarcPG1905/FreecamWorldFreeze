@@ -27,6 +27,11 @@ allprojects {
             forRepository { maven("https://api.modrinth.com/maven") }
             filter { includeGroup("maven.modrinth") }
         }
+
+        exclusiveContent {
+            forRepository { maven("https://cursemaven.com") }
+            filter { includeGroup("curse.maven") }
+        }
     }
 }
 

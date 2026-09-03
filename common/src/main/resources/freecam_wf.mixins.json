@@ -3,7 +3,14 @@
   "package": "com.marcpg.fwf.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "CamEnhanceMixin",
+    "CamTweaksMixin",
+    "EasyFreecamMixin",
+    "FreeCamMcMixin",
+    "KapiteonMixin",
+    "WurstMixin",
     "XoltMixin",
+    "ZergatulMixin"
   ],
   "injectors": {
     "defaultRequire": 1
