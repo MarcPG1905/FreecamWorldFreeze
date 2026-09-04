@@ -12,7 +12,7 @@ public class CamEnhanceImpl implements FreecamImpl {
     public void init() {
         try {
             Object mainInstance = me.syflog.camenh.Main.class.getMethod("get").invoke(this);
-            instance = (me.syflog.camenh.Freecam) mainInstance.getClass().getMethod("freecam").invoke(this);
+            instance = (me.syflog.camenh.Freecam) mainInstance.getClass().getMethod("freecam").invoke(mainInstance);
         } catch (ReflectiveOperationException e) {
             throw new RuntimeException("Could not get freecam instance from \"Camera Enhancements\" mod.");
         }

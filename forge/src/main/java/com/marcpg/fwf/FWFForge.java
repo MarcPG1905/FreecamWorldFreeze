@@ -24,20 +24,17 @@ public class FWFForge {
         context.registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory((_, parent) -> new FWFConfig.ConfigScreen(parent)));
     }
 
-    @Mod.EventBusSubscriber(modid = "freecam_wf", bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    static final class ModBusEvents {
-        @SubscribeEvent
-        static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
-            event.register(TOGGLE_FREEZE_KEY.get());
-        }
-    }
-
     @Mod.EventBusSubscriber(modid = "freecam_wf", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
     static final class GameBusEvents {
         @SubscribeEvent
         static void onClientTickPost(TickEvent.ClientTickEvent.Post event) {
             while (TOGGLE_FREEZE_KEY.get().consumeClick())
                 FreecamWF.config().toggleEnabled();
+        }
+
+        @SubscribeEvent
+        static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
+            event.register(TOGGLE_FREEZE_KEY.get());
         }
     }
 }

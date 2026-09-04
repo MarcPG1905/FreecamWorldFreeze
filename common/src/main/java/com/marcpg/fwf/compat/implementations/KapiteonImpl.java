@@ -13,7 +13,7 @@ public class KapiteonImpl implements FreecamImpl {
         try {
             Field keyMappingField = com.kapiteon.freecam.FreeCam.INSTANCE.getClass().getDeclaredField("keyOnOff");
             keyMappingField.setAccessible(true);
-            keyMapping = (KeyMapping) keyMappingField.get(this.getClass());
+            keyMapping = (KeyMapping) keyMappingField.get(com.kapiteon.freecam.FreeCam.INSTANCE);
         } catch (ReflectiveOperationException e) {
             throw new RuntimeException("Could not access fields from \"Freecam by kapiteon\" mod.");
         }
