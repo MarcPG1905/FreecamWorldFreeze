@@ -1,7 +1,7 @@
-package com.marcpg.fwf.mixin;
+package com.marcpg.fwf.compat.mixin;
 
 import com.marcpg.fwf.EffectManager;
-import com.marcpg.fwf.implementations.CamEnhanceImpl;
+import com.marcpg.fwf.compat.implementations.CamEnhanceImpl;
 import net.minecraft.client.KeyMapping;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

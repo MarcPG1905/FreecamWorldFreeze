@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.marcpg.fwf.mixin",
+  "package": "com.marcpg.fwf.compat.mixin",
   "compatibilityLevel": "JAVA_25",
   "plugin": "com.marcpg.fwf.compat.MixinConfigPlugin",
   "mixins": [

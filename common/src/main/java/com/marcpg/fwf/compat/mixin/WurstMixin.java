@@ -1,4 +1,4 @@
-package com.marcpg.fwf.mixin;
+package com.marcpg.fwf.compat.mixin;
 
 import com.marcpg.fwf.EffectManager;
 import org.spongepowered.asm.mixin.Mixin;

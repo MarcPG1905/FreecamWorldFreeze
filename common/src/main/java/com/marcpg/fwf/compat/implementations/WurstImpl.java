@@ -1,4 +1,4 @@
-package com.marcpg.fwf.implementations;
+package com.marcpg.fwf.compat.implementations;
 
 import com.marcpg.fwf.compat.FreecamImpl;
 import net.minecraft.client.KeyMapping;

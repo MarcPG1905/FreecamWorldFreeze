@@ -5,6 +5,8 @@ import java.util.List;
 public final class FreecamIntegrations {
     private FreecamIntegrations() {}
 
+    private static final String BASE_PACKAGE = "com.marcpg.fwf.compat";
+
     public static final List<Integration> AVAILABLE = List.of(
             new Integration("Freecam", "net.xolt.freecam.Freecam", "Xolt"),
             new Integration("FreeCamMc", "com.jasonzli.freecam.FreeCam", "FreeCamMc"),
@@ -23,7 +25,10 @@ public final class FreecamIntegrations {
             String mixin
     ) {
         public Integration(String name, String checkedClass, String prefix) {
-            this(name, checkedClass, "com.marcpg.fwf.implementations." + prefix + "Impl", "com.marcpg.fwf.mixin." + prefix + "Mixin");
+            this(name, checkedClass,
+                    BASE_PACKAGE + ".implementations." + prefix + "Impl",
+                    BASE_PACKAGE + ".mixin." + prefix + "Mixin"
+            );
         }
 
         public boolean isAvailable() {
