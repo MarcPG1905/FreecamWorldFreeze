@@ -18,7 +18,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         return FreecamIntegrations.AVAILABLE.stream()
-                .anyMatch(i -> i.mixin().equals(targetClassName) && i.isAvailable());
+                .anyMatch(i -> i.mixin().equals(mixinClassName) && i.isAvailable());
     }
 
     @Override

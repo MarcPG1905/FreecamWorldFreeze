@@ -32,10 +32,11 @@ public final class FreecamIntegrations {
         }
 
         public boolean isAvailable() {
-            try {
-                Class.forName(checkedClass, false, getClass().getClassLoader());
-                return true;
-            } catch (ClassNotFoundException e) {
+            String resource = checkedClass.replace('.', '/') + ".class";
+            try { // Use this weird checking procedure to not even hint at the JVM to load the class,
+                // because apparently, the JVM wants to load it VERY badly.
+                return Thread.currentThread().getContextClassLoader().getResource(resource) != null;
+            } catch (Exception e) {
                 return false;
             }
         }

@@ -1,5 +1,6 @@
 package com.marcpg.fwf;
 
+import com.marcpg.fwf.compat.FreecamImplManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.components.AbstractSliderButton;
@@ -13,7 +14,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.xolt.freecam.Freecam;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NonNull;
 
@@ -26,7 +26,7 @@ public final class FWFConfig {
     public boolean enabled = true;
 
     public void toggleEnabled() {
-        if (!Freecam.isEnabled())
+        if (!FreecamImplManager.isEnabled())
             return; // Don't toggle if not in the freecam.
 
         enabled = !enabled;
