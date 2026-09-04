@@ -1,30 +1,47 @@
 # Freecam World Freeze
 
-Extension to [the Freecam mod](https://modrinth.com/mod/freecam) which freezes or slows down the world when the freecam is activated.
+Allows you to freeze or slow down your singleplayer world while in the freecam of almost any mod.
 
-> **Freecam (or a derivative of it) is required for this mod to run!**
+> **This is an extension, it does not provide a Freecam itself!**
 
 By default when the extension is set to freeze, only the world is frozen and the player keeps moving.  
-You can **enable `Freeze Player` in Freecam's options to also freeze the player**.
+Some mods may have **a `Freeze Player` option to also freeze the player**. This will also be part of this extension in the future.
+
+## Compatible Mods
+
+| Mod                                                                                     | Freezing | Slow-Mo |
+| --------------------------------------------------------------------------------------- | -------- | ------- |
+| [Freecam](https://modrinth.com/mod/freecam) & derivatives                               | ✅       | 🟨¹     |
+| [Freecam by Zergatul](https://www.curseforge.com/minecraft/mc-mods/freecam-by-zergatul) | ✅       | 🟨²     |
+| [Freecam by Kapiteon](https://www.curseforge.com/minecraft/mc-mods/freecam)             | ✅       | 🟨¹     |
+| [FreeCamMC](https://modrinth.com/mod/freecammc)                                         | ✅       | 🟨¹     |
+| [Camera Tweaks](https://modrinth.com/mod/cameratweaks)                                  | ✅       | 🟨²     |
+| [Camera Enhancements](https://modrinth.com/mod/camenh)                                  | ✅       | 🟨¹     |
+| [(Easy) Freecam](https://modrinth.com/mod/easy-freecam)                                 | 🟨³      | ✅      |
+| [WI Freecam (Wurst)](https://www.curseforge.com/minecraft/mc-mods/wi-freecam)           | ✅       | 🟨¹     |
+
+<details>
+<summary>Markings (¹²³)</summary>
+
+- ¹ Freecam affected by slow-motion.<br>
+- ² Input delay in freecam.<br>
+- ³ Stuttering-like movement.<br>
+</details>
 
 ## Installation
 
-To install, first **download one of these base mods**:
-
-- [Freecam](https://modrinth.com/mod/freecam)
-- [Fair Freecam](https://modrinth.com/mod/fairfreecam)
-- [Freecam (Fair Play)](https://modrinth.com/mod/legacyfreecam) (only for 1.21.X)
+To install, first **download one of these base mods listed above**.
 
 Now, you can **download this mod** and drop it into your `./mods/` folder aswell.
 
-That's it! You can **start Minecraft and enjoy the mod/extension**.
+That's it! You can **start Minecraft and enjoy the extension**.
 
 ## Features
 
 ### Configure Freeze/Slow-Motion
 
 Using the **mod menu** of your platform (on Fabric, you need to install "Mod Menu" for this), you can access the extension's **configuration screen**.  
-There, you can slide the slider for three different modes:
+There, you can move the slider for three different modes:
 
 1. **Left:** Freeze the world
 2. **Middle:** Slow down the world (configurable intensity)
@@ -32,19 +49,24 @@ There, you can slide the slider for three different modes:
 
 ### Toggle the Extension while in Freecam
 
-**The default key to toggle is `F6`.**
-> This can be modified in Minecraft's keybind settings.
+**The default key to toggle is `F6`.** It can be modified in Minecraft's keybind settings.
+
+> Some freecam mods may use this to activate their freecam.
+> You will need to manually remap the keybind in those cases case.
 
 Pressing the set key will **enable or disable the freeze/slow-motion** in your world.
 
 ## Planned Features
 
-- Integration with other popular freecam mods.
+- **Freeze the player** in freezing mode (if the freecam mod does not have this already).
+- **Normal freecam flight speeds** when slowing down the game.
 
 ## How this mod works
 
-This mod works the same functionality that the `/tick` commands use under the hood, but hooks into the Freecam mod to automatically do this whenever using the freecam.
-In addition to this, it will keep track of previous values to not override any manual usage of the `/tick` command, and it handles all possible side cases, configuration, etc. for you.
+This mod contains adapaters for the most downloaded freecam mods and automatically detects which of the mods is installed, loading only those adapters.  
+Once this is done, it uses the same mechanisms as the `/tick` command does internally while hooking into the installed freecam mod to apply automatically when using the freecam.
+
+There's also a bunch of other black magic going on which is kinda boring. If it still interests you, the whole project is open-source on GitHub for you to check out.
 
 ## Contact
 
