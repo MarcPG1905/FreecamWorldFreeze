@@ -30,8 +30,7 @@
 
   "depends": {
     "minecraft": ">=${minMinecraftVersion}",
-    "fabricloader": "*",
-    "freecam": "*"
+    "fabricloader": "*"
   },
 
   "recommends": {
