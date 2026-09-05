@@ -1,10 +1,10 @@
 package com.marcpg.fwf;
 
-import com.marcpg.fwf.compat.FreecamImplManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.CycleButton;
 import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
@@ -12,6 +12,7 @@ import net.minecraft.client.gui.layouts.LayoutSettings;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Contract;
@@ -22,28 +23,31 @@ import java.nio.file.Files;
 import java.util.List;
 
 public final class FWFConfig {
+    private static final SystemToast.SystemToastId FWF_TOGGLE_TOAST_ID = new SystemToast.SystemToastId(3000L);
+
+    // Ordered from oldest to newest added:
     public float tickSpeed = 0f;
-    public boolean enabled = true;
+    public boolean worldEffectEnabled = true;
+    public boolean freezePlayer = true;
 
-    public void toggleEnabled() {
-        if (!FreecamImplManager.isEnabled())
-            return; // Don't toggle if not in the freecam.
-
-        enabled = !enabled;
+    public void toggleWorldEffect() {
+        worldEffectEnabled = !worldEffectEnabled;
         FreecamWF.config().saveConfig();
         EffectManager.updateAll();
 
-        Component feature = Component.translatable("options.freecam_wf.enabled.toast." + (tickSpeed > 0f ? "slow-mo" : "freeze"));
-        Minecraft.getInstance().gui.toastManager().addToast(new SystemToast(
-                SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
-                Component.translatable("options.freecam_wf.enabled.toast.title", feature),
-                Component.translatable("options.freecam_wf.enabled.toast.message." + enabled, feature)
-        ));
+        notifyToggle(tickSpeed > 0f ? "slow_motion" : "freeze", worldEffectEnabled);
+    }
+
+    public void toggleFreezePlayer() {
+        freezePlayer = !freezePlayer;
+        FreecamWF.config().saveConfig();
+
+        notifyToggle("freeze_player", freezePlayer);
     }
 
     public void saveConfig() {
         try {
-            Files.writeString(FreecamWF.configFile(), tickSpeed + "\n" + enabled);
+            Files.writeString(FreecamWF.configFile(), tickSpeed + "\n" + worldEffectEnabled + "\n" + freezePlayer);
         } catch (IOException e) {
             FreecamWF.logger().error("Could not save config file", e);
         }
@@ -56,9 +60,27 @@ public final class FWFConfig {
         try {
             List<String> lines = Files.readAllLines(FreecamWF.configFile());
             tickSpeed = Float.parseFloat(lines.get(0));
-            enabled = Boolean.parseBoolean(lines.get(1));
+            worldEffectEnabled = Boolean.parseBoolean(lines.get(1));
+            freezePlayer = Boolean.parseBoolean(lines.get(2));
+        } catch (IndexOutOfBoundsException _) {
+            // Ignore if a newer value does not exist in the config yet.
         } catch (IOException | NumberFormatException e) {
             FreecamWF.logger().error("Could not read config file", e);
+        }
+    }
+
+    private void notifyToggle(String feature, boolean newValue) {
+        Component message = Component.translatable(
+                "generic.freecam_wf.config.toggle",
+                Component.translatable("generic.freecam_wf.feature." + feature),
+                Component.translatable("generic.freecam_wf." + (newValue ? "on" : "off"))
+        );
+
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player != null) {
+            player.sendOverlayMessage(message);
+        } else {
+            Minecraft.getInstance().gui.toastManager().addToast(new SystemToast(FWF_TOGGLE_TOAST_ID, Component.translatable("options.freecam_wf.title"), message));
         }
     }
 
@@ -85,6 +107,11 @@ public final class FWFConfig {
                     220, 20,
                     FreecamWF.config().tickSpeed
             ));
+
+            this.layout.addToContents(CycleButton.onOffBuilder(FreecamWF.config().freezePlayer).create(Component.translatable("options.freecam_wf.freeze_player"), (_, newValue) -> {
+                FreecamWF.config().freezePlayer = newValue;
+                EffectManager.updateAll();
+            }));
 
             // Footer
             this.layout.addToFooter(Button.builder(CommonComponents.GUI_DONE, _ -> this.onClose()).width(200).build());

@@ -39,7 +39,7 @@ public final class FWFNeoForge {
         @SubscribeEvent
         static void onClientTickPost(ClientTickEvent.Post event) {
             while (TOGGLE_FREEZE_KEY.get().consumeClick())
-                FreecamWF.config().toggleEnabled();
+                FreecamWF.config().toggleWorldEffect();
         }
     }
 }

@@ -29,7 +29,7 @@ public class FWFForge {
         @SubscribeEvent
         static void onClientTickPost(TickEvent.ClientTickEvent.Post event) {
             while (TOGGLE_FREEZE_KEY.get().consumeClick())
-                FreecamWF.config().toggleEnabled();
+                FreecamWF.config().toggleWorldEffect();
         }
 
         @SubscribeEvent

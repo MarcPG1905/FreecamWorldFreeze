@@ -18,7 +18,7 @@ public final class FWFFabric implements ClientModInitializer {
         // Freeze key pressing
         ClientTickEvents.END_CLIENT_TICK.register(_ -> {
             while (TOGGLE_FREEZE_KEY.consumeClick())
-                FreecamWF.config().toggleEnabled();
+                FreecamWF.config().toggleWorldEffect();
         });
     }
 }

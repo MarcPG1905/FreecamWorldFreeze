@@ -23,7 +23,7 @@ public final class EffectManager {
     }
 
     public static void updateFrozenStatus(TickRateManager trm) {
-        if (FreecamImplManager.isEnabled() && FreecamWF.config().enabled && FreecamWF.config().tickSpeed <= 0f) {
+        if (FreecamImplManager.isEnabled() && FreecamWF.config().worldEffectEnabled && FreecamWF.config().tickSpeed <= 0f) {
             if (previousFrozen == -1)
                 previousFrozen = trm.isFrozen() ? 1 : 0;
 
@@ -40,7 +40,7 @@ public final class EffectManager {
 
     public static void updateTickrateStatus(TickRateManager trm) {
         float targetTickSpeed = FreecamWF.config().tickSpeed;
-        if (FreecamImplManager.isEnabled() && FreecamWF.config().enabled && targetTickSpeed > 0f && targetTickSpeed < 20f) {
+        if (FreecamImplManager.isEnabled() && FreecamWF.config().worldEffectEnabled && targetTickSpeed > 0f && targetTickSpeed < 20f) {
             if (previousTickrate == -1)
                 previousTickrate = trm.tickrate();
 
