@@ -9,7 +9,8 @@ import org.slf4j.LoggerFactory;
 
 public final class FWFFabric implements ClientModInitializer {
     private static final KeyMapping.Category CATEGORY = KeyMapping.Category.register(FreecamWF.KEY_CATEGORY_IDENTIFIER);
-    private static final KeyMapping TOGGLE_FREEZE_KEY = KeyMappingHelper.registerKeyMapping(FreecamWF.createToggleFreezeKey(CATEGORY));
+    private static final KeyMapping TOGGLE_WORLD_EFFECT_KEY = KeyMappingHelper.registerKeyMapping(FreecamWF.createWorldEffectToggleKey(CATEGORY));
+    private static final KeyMapping TOGGLE_PLAYER_FREEZE_KEY = KeyMappingHelper.registerKeyMapping(FreecamWF.createPlayerFreezeToggleKey(CATEGORY));
 
     @Override
     public void onInitializeClient() {
@@ -17,8 +18,11 @@ public final class FWFFabric implements ClientModInitializer {
 
         // Freeze key pressing
         ClientTickEvents.END_CLIENT_TICK.register(_ -> {
-            while (TOGGLE_FREEZE_KEY.consumeClick())
+            while (TOGGLE_WORLD_EFFECT_KEY.consumeClick())
                 FreecamWF.config().toggleWorldEffect();
+
+            while (TOGGLE_PLAYER_FREEZE_KEY.consumeClick())
+                FreecamWF.config().toggleFreezePlayer();
         });
     }
 }

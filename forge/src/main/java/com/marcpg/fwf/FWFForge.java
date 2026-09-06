@@ -15,7 +15,8 @@ import net.minecraftforge.fml.loading.FMLPaths;
 @Mod("freecam_wf")
 public class FWFForge {
     private static final KeyMapping.Category CATEGORY = new KeyMapping.Category(FreecamWF.KEY_CATEGORY_IDENTIFIER);
-    public static final Lazy<KeyMapping> TOGGLE_FREEZE_KEY = Lazy.of(() -> FreecamWF.createToggleFreezeKey(CATEGORY));
+    public static final Lazy<KeyMapping> TOGGLE_WORLD_EFFECT_KEY = Lazy.of(() -> FreecamWF.createWorldEffectToggleKey(CATEGORY));
+    public static final Lazy<KeyMapping> TOGGLE_PLAYER_FREEZE_KEY = Lazy.of(() -> FreecamWF.createPlayerFreezeToggleKey(CATEGORY));
 
     public FWFForge(FMLJavaModLoadingContext context) {
         FreecamWF.setup(FMLPaths.CONFIGDIR.get(), LogUtils.getLogger());
@@ -28,13 +29,17 @@ public class FWFForge {
     static final class GameBusEvents {
         @SubscribeEvent
         static void onClientTickPost(TickEvent.ClientTickEvent.Post event) {
-            while (TOGGLE_FREEZE_KEY.get().consumeClick())
+            while (TOGGLE_WORLD_EFFECT_KEY.get().consumeClick())
                 FreecamWF.config().toggleWorldEffect();
+
+            while (TOGGLE_PLAYER_FREEZE_KEY.get().consumeClick())
+                FreecamWF.config().toggleFreezePlayer();
         }
 
         @SubscribeEvent
         static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
-            event.register(TOGGLE_FREEZE_KEY.get());
+            event.register(TOGGLE_WORLD_EFFECT_KEY.get());
+            event.register(TOGGLE_PLAYER_FREEZE_KEY.get());
         }
     }
 }

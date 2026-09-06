@@ -12,9 +12,6 @@ public final class FreecamWF {
     public static final String MOD_ID = "freecam_wf";
 
     public static final Identifier KEY_CATEGORY_IDENTIFIER = Identifier.fromNamespaceAndPath(FreecamWF.MOD_ID, "main");
-    public static KeyMapping createToggleFreezeKey(KeyMapping.Category category) {
-        return new KeyMapping("key." + FreecamWF.MOD_ID + ".toggle", InputConstants.Type.KEYSYM, InputConstants.KEY_F6, category);
-    }
 
     private static Path configFile;
     private static Logger logger;
@@ -32,5 +29,13 @@ public final class FreecamWF {
         FreecamWF.config.loadConfig();
 
         FreecamImplManager.init();
+    }
+
+    public static KeyMapping createWorldEffectToggleKey(KeyMapping.Category category) {
+        return new KeyMapping("key.freecam_wf.toggle.effect", InputConstants.Type.KEYSYM, InputConstants.KEY_F6, category);
+    }
+
+    public static KeyMapping createPlayerFreezeToggleKey(KeyMapping.Category category) {
+        return new KeyMapping("key.freecam_wf.toggle.freeze_player", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), category);
     }
 }

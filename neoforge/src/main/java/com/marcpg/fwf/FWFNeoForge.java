@@ -16,7 +16,8 @@ import net.neoforged.neoforge.common.util.Lazy;
 @Mod("freecam_wf")
 public final class FWFNeoForge {
     private static final KeyMapping.Category CATEGORY = new KeyMapping.Category(FreecamWF.KEY_CATEGORY_IDENTIFIER);
-    public static final Lazy<KeyMapping> TOGGLE_FREEZE_KEY = Lazy.of(() -> FreecamWF.createToggleFreezeKey(CATEGORY));
+    public static final Lazy<KeyMapping> TOGGLE_WORLD_EFFECT_KEY = Lazy.of(() -> FreecamWF.createWorldEffectToggleKey(CATEGORY));
+    public static final Lazy<KeyMapping> TOGGLE_PLAYER_FREEZE_KEY = Lazy.of(() -> FreecamWF.createPlayerFreezeToggleKey(CATEGORY));
 
     public FWFNeoForge(ModContainer container) {
         FreecamWF.setup(FMLPaths.CONFIGDIR.get(), LogUtils.getLogger());
@@ -30,7 +31,8 @@ public final class FWFNeoForge {
         @SubscribeEvent
         static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
             event.registerCategory(CATEGORY);
-            event.register(TOGGLE_FREEZE_KEY.get());
+            event.register(TOGGLE_WORLD_EFFECT_KEY.get());
+            event.register(TOGGLE_PLAYER_FREEZE_KEY.get());
         }
     }
 
@@ -38,8 +40,11 @@ public final class FWFNeoForge {
     static final class GameBusEvents {
         @SubscribeEvent
         static void onClientTickPost(ClientTickEvent.Post event) {
-            while (TOGGLE_FREEZE_KEY.get().consumeClick())
+            while (TOGGLE_WORLD_EFFECT_KEY.get().consumeClick())
                 FreecamWF.config().toggleWorldEffect();
+
+            while (TOGGLE_PLAYER_FREEZE_KEY.get().consumeClick())
+                FreecamWF.config().toggleFreezePlayer();
         }
     }
 }
