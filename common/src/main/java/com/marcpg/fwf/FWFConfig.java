@@ -35,14 +35,14 @@ public final class FWFConfig {
         FreecamWF.config().saveConfig();
         EffectManager.updateAll();
 
-        notifyToggle(tickSpeed > 0f ? "slow_motion" : "freeze", worldEffectEnabled);
+        notifyToggle(tickSpeed > 0f ? FZFFeature.SLOW_MOTION : FZFFeature.FREEZE, worldEffectEnabled);
     }
 
     public void toggleFreezePlayer() {
         freezePlayer = !freezePlayer;
         FreecamWF.config().saveConfig();
 
-        notifyToggle("freeze_player", freezePlayer);
+        notifyToggle(FZFFeature.FREEZE_PLAYER, freezePlayer);
     }
 
     public void saveConfig() {
@@ -69,10 +69,10 @@ public final class FWFConfig {
         }
     }
 
-    private void notifyToggle(String feature, boolean newValue) {
+    private void notifyToggle(FZFFeature feature, boolean newValue) {
         Component message = Component.translatable(
                 "generic.freecam_wf.config.toggle",
-                Component.translatable("generic.freecam_wf.feature." + feature),
+                feature.translation,
                 Component.translatable("generic.freecam_wf." + (newValue ? "on" : "off"))
         );
 
