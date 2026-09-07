@@ -23,7 +23,11 @@
 
   "mixins": [
     {
-      "config": "${modId}.mixins.json",
+      "config": "${modId}.normal.mixins.json",
+      "environment": "client"
+    },
+    {
+      "config": "${modId}.compat.mixins.json",
       "environment": "client"
     }
   ],

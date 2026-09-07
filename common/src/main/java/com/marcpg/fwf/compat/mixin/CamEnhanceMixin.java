@@ -21,6 +21,7 @@ public class CamEnhanceMixin {
         EffectManager.updateAll();
     }
 
+    @SuppressWarnings("InjectLocalCaptureCanBeReplacedWithLocal")
     @Inject(method = "<init>", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILHARD)
     private void captureKeyMapping(CallbackInfo ci, KeyMapping freecamKeyMapping) {
         CamEnhanceImpl.keyMapping = freecamKeyMapping;

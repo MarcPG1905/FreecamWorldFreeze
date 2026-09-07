@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.marcpg.fwf.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EntityMixin",
+    "LivingEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

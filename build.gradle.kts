@@ -61,7 +61,7 @@ tasks {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
         manifest { // For Forge
-            attributes["MixinConfigs"] = "freecam_wf.mixins.json"
+            attributes["MixinConfigs"] = "freecam_wf.normal.mixins.json,freecam_wf.compat.mixins.json"
         }
     }
 }

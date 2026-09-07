@@ -16,7 +16,10 @@ logoFile = "icon.png"
 logoBlur = true
 
 [[mixins]]
-config = "${modId}.mixins.json"
+config = "${modId}.normal.mixins.json"
+
+[[mixins]]
+config = "${modId}.compat.mixins.json"
 
 [[dependencies.${modId}]]
 modId = "minecraft"

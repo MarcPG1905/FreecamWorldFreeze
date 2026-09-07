@@ -23,6 +23,6 @@ sourceSets.main.configure {
 
 tasks.named<Jar>("jar") {
     manifest {
-        attributes["MixinConfigs"] = "freecam_wf.mixins.json"
+        attributes["MixinConfigs"] = "freecam_wf.normal.mixins.json,freecam_wf.compat.mixins.json"
     }
 }
