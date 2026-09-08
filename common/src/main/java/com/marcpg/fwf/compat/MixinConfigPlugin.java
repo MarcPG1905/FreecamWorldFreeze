@@ -3,6 +3,7 @@ package com.marcpg.fwf.compat;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -17,8 +18,8 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return FreecamIntegrations.AVAILABLE.stream()
-                .anyMatch(i -> i.mixin().equals(mixinClassName) && i.isAvailable());
+        return Arrays.stream(FreecamIntegrations.values())
+                .anyMatch(i -> i.mixin.equals(mixinClassName) && i.isAvailable());
     }
 
     @Override

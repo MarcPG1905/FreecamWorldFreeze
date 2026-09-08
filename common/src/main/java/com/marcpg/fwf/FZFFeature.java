@@ -19,6 +19,6 @@ public enum FZFFeature {
     }
 
     public boolean checkCondition() {
-        return effectCondition.getAsBoolean() && !FreecamImplManager.integration().nativeFeatures().contains(this);
+        return effectCondition.getAsBoolean() && !FreecamImplManager.integration().nativeFeatures.contains(this);
     }
 }
