@@ -1,12 +1,11 @@
 package com.marcpg.fwf;
 
+import com.marcpg.fwf.compat.FreecamImplManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
-import net.minecraft.client.gui.components.AbstractSliderButton;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.CycleButton;
-import net.minecraft.client.gui.components.StringWidget;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.toasts.SystemToast;
+import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.layouts.LayoutSettings;
 import net.minecraft.client.gui.layouts.LinearLayout;
@@ -15,6 +14,7 @@ import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NonNull;
 
@@ -47,6 +47,10 @@ public final class FWFConfig {
     }
 
     public void toggleFreezePlayer() {
+        // Ignore if the feature natively exists in the freecam supplier.
+        if (FZFFeature.FREEZE_PLAYER.isNative())
+            return;
+
         freezePlayer = !freezePlayer;
         FreecamWF.config().saveConfig();
 
@@ -109,17 +113,30 @@ public final class FWFConfig {
             LinearLayout header = this.layout.addToHeader(LinearLayout.vertical().spacing(8));
             header.addChild(new StringWidget(TITLE, this.font), LayoutSettings::alignHorizontallyCenter);
 
-            // Contents
-            this.layout.addToContents(new TimeFactorSlider(
-                    width / 2 - 110, height / 2 - 10,
-                    220, 20,
-                    FreecamWF.config().tickSpeed
-            ));
+            GridLayout gridLayout = new GridLayout();
+            gridLayout.defaultCellSetting().paddingHorizontal(4).paddingBottom(4).alignHorizontallyCenter();
+            GridLayout.RowHelper helper = gridLayout.createRowHelper(2);
 
-            this.layout.addToContents(CycleButton.onOffBuilder(FreecamWF.config().freezePlayer).create(Component.translatable("options.freecam_wf.freeze_player"), (_, newValue) -> {
+            // Contents
+            helper.addChild(new StringWidget(Component.translatable("options.freecam_wf.compat_info", FreecamImplManager.integration().name).withColor(TextColor.GRAY), this.font), 2);
+
+            helper.addChild(new TimeFactorSlider(
+                    0, 0,
+                    300, 20,
+                    FreecamWF.config().tickSpeed
+            ), 2);
+
+            CycleButton<Boolean> button = CycleButton.onOffBuilder(FreecamWF.config().freezePlayer).create(Component.translatable("options.freecam_wf.freeze_player"), (_, newValue) -> {
                 FreecamWF.config().freezePlayer = newValue;
                 EffectManager.updateAll();
-            }));
+            });
+            if (FZFFeature.FREEZE_PLAYER.isNative()) {
+                button.active = false;
+                button.setTooltip(Tooltip.create(Component.translatable("options.freecam_wf.freeze_player.disabled", FreecamImplManager.integration().name)));
+            }
+            helper.addChild(button);
+
+            this.layout.addToContents(gridLayout);
 
             // Footer
             this.layout.addToFooter(Button.builder(CommonComponents.GUI_DONE, _ -> this.onClose()).width(200).build());

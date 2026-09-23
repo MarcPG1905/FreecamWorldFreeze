@@ -13,5 +13,7 @@
   "options.freecam_wf.factor.20": "No Effect",
   "options.freecam_wf.factor.other": "%s ticks (%s)",
   "options.freecam_wf.freeze_player": "Freeze Player",
-  "options.freecam_wf.title": "Freecam World Freeze Config"
+  "options.freecam_wf.freeze_player.disabled": "Your installed freecam supplier (%s) contains a native \"Freeze Player\" option.",
+  "options.freecam_wf.title": "Freecam World Freeze Config",
+  "options.freecam_wf.compat_info": "Detected Freecam Provider: %s"
 }

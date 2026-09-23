@@ -18,7 +18,11 @@ public enum FZFFeature {
         this.effectCondition = effectCondition;
     }
 
+    public boolean isNative() {
+        return FreecamImplManager.integration().nativeFeatures.contains(FZFFeature.FREEZE_PLAYER);
+    }
+
     public boolean checkCondition() {
-        return effectCondition.getAsBoolean() && !FreecamImplManager.integration().nativeFeatures.contains(this);
+        return effectCondition.getAsBoolean() && !isNative();
     }
 }
