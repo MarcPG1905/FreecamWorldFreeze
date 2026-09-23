@@ -1,7 +1,9 @@
 package com.marcpg.fwf;
 
+import com.marcpg.faststats.ModContext;
 import com.marcpg.fwf.compat.FreecamImplManager;
 import com.mojang.blaze3d.platform.InputConstants;
+import dev.faststats.data.Metric;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
@@ -12,6 +14,15 @@ public final class FreecamWF {
     public static final String MOD_ID = "freecam_wf";
 
     public static final Identifier KEY_CATEGORY_IDENTIFIER = Identifier.fromNamespaceAndPath(FreecamWF.MOD_ID, "main");
+
+    private static final ModContext context = new ModContext.Factory(FreecamWF.MOD_ID, "e2df1a870be81c5962235bd202b0f439")
+            .metrics(factory -> factory
+                    .addMetric(Metric.string("freecam_mod", () -> FreecamImplManager.integration().name))
+                    .addMetric(Metric.string("config_tick_speed", () -> FreecamWF.config().getTickSpeedCategory()))
+                    .addMetric(Metric.bool("config_world_effect_enabled", () -> FreecamWF.config().worldEffectEnabled))
+                    .addMetric(Metric.bool("config_freeze_player", () -> FreecamWF.config().freezePlayer))
+                    .create())
+            .create();
 
     private static Path configFile;
     private static Logger logger;

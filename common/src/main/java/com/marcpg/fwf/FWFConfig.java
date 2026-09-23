@@ -30,6 +30,14 @@ public final class FWFConfig {
     public boolean worldEffectEnabled = true;
     public boolean freezePlayer = true;
 
+    public String getTickSpeedCategory() {
+        int rounded = Math.round(tickSpeed);
+        if (rounded > 20) return "Sped-Up";
+        if (rounded == 20) return "No Effect";
+        if (rounded > 0) return "Slow-Motion";
+        return "Frozen";
+    }
+
     public void toggleWorldEffect() {
         worldEffectEnabled = !worldEffectEnabled;
         FreecamWF.config().saveConfig();

@@ -14,6 +14,8 @@ dependencies {
     compileOnly(libs.mixin)
     compileOnly(libs.asm.tree)
 
+    compileOnly(libs.faststats.modding)
+
     // All the different compatible mods.              // [PREFIX] - [PACKAGE] - [LINK]
     compileOnly("curse.maven:project-1455610:8521863") // Wurst* - net.wimods - https://www.curseforge.com/minecraft/mc-mods/wi-freecam
     compileOnly("curse.maven:project-266734:8604113")  // Kapiteon* - com.kapiteon - https://www.curseforge.com/minecraft/mc-mods/freecam

@@ -4,7 +4,7 @@ plugins {
 
 extra["modId"] = "freecam_wf"
 extra["modName"] = "Freecam World Freeze"
-extra["modVersion"] = "1.2.0"
+extra["modVersion"] = "1.3.0"
 extra["modDescription"] = "Adds world freezing/pausing or slow-motion to almost any Freecam mod in singleplayer."
 extra["modGitHubUrl"] = "https://github.com/MarcPG1905/FreecamWorldFreeze"
 extra["minMinecraftVersion"] = "1.20.3"
@@ -17,7 +17,6 @@ allprojects {
         mavenLocal()
         mavenCentral()
 
-        // So all dependencies can be located by both Gradle and the version catalogue updater.
         maven("https://maven.fabricmc.net/")
         maven("https://maven.neoforged.net/releases/")
         maven("https://maven.terraformersmc.com/releases/")
@@ -42,10 +41,12 @@ val childJars = configurations.create("childJars") {
 }
 
 dependencies {
-    add(childJars.name, project(":common"))
-    add(childJars.name, project(":fabric"))
-    add(childJars.name, project(":forge"))
-    add(childJars.name, project(":neoforge"))
+    childJars(project(":common"))
+    childJars(project(":fabric"))
+    childJars(project(":forge"))
+    childJars(project(":neoforge"))
+
+    childJars(libs.faststats.modding)
 }
 
 tasks {
