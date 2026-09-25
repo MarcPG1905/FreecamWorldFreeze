@@ -19,7 +19,7 @@ public enum FZFFeature {
     }
 
     public boolean isNative() {
-        return FreecamImplManager.integration().nativeFeatures.contains(FZFFeature.FREEZE_PLAYER);
+        return FreecamImplManager.integration().nativeFeatures.contains(this);
     }
 
     public boolean checkCondition() {
