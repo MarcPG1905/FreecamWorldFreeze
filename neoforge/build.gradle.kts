@@ -3,9 +3,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":common"))
-
-    implementation(libs.neoforge)
+    compileOnly(project(":common"))
+    compileOnly(libs.neoforge)
 }
 
 sourceSets.main.configure {

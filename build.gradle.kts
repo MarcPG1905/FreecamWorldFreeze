@@ -8,6 +8,7 @@ extra["modVersion"] = "1.3.0"
 extra["modDescription"] = "Adds world freezing/pausing or slow-motion to almost any Freecam mod in singleplayer."
 extra["modGitHubUrl"] = "https://github.com/MarcPG1905/FreecamWorldFreeze"
 extra["minMinecraftVersion"] = "1.20.3"
+extra["faststatsVersion"] = libs.versions.faststats.get()
 
 allprojects {
     group = "com.marcpg"
@@ -45,8 +46,6 @@ dependencies {
     childJars(project(":fabric"))
     childJars(project(":forge"))
     childJars(project(":neoforge"))
-
-    childJars(libs.faststats.modding)
 }
 
 tasks {
@@ -76,7 +75,7 @@ subprojects {
     tasks.processResources {
         val properties = rootProject.extra.properties.mapValues { it.value.toString() }
         inputs.properties(properties)
-        filesMatching(listOf("fabric.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml")) {
+        filesMatching(listOf("fabric.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml", "pack.mcmeta", "META-INF/jarjar/metadata.json")) {
             expand(properties)
         }
     }

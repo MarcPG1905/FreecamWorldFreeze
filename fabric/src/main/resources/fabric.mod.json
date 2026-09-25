@@ -34,8 +34,15 @@
 
   "depends": {
     "minecraft": ">=${minMinecraftVersion}",
-    "fabricloader": "*"
+    "fabricloader": "*",
+    "fabric-api": "*"
   },
+
+  "jars": [
+    {
+      "file": "jars/modding-${faststatsVersion}.jar",
+    }
+  ],
 
   "recommends": {
     "modmenu": "*",

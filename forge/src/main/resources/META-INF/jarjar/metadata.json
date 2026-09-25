@@ -1,0 +1,16 @@
+{
+  "jars": [
+    {
+      "identifier": {
+        "group": "com.marcpg.faststats",
+        "artifact": "modding"
+      },
+      "version": {
+        "range": "[${faststatsVersion},)",
+        "artifactVersion": "${faststatsVersion}"
+      },
+      "path": "jars/modding-${faststatsVersion}.jar",
+      "isObfuscated": false
+    }
+  ]
+}

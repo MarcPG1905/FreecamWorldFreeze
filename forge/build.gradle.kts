@@ -9,9 +9,9 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":common"))
+    compileOnly(project(":common"))
 
-    implementation(minecraft.dependency(libs.forge))
+    compileOnly(minecraft.dependency(libs.forge))
     annotationProcessor(libs.forge.eventbusValidator)
 }
 

@@ -1,3 +1,5 @@
+@file:Suppress("AvoidDuplicateDependencies")
+
 plugins {
     id("java-library")
     alias(libs.plugins.loom)
@@ -9,12 +11,15 @@ repositories {
     maven("https://repo.spongepowered.org/maven/")
 }
 
+val faststats = configurations.create("faststats")
+
 dependencies {
     minecraft(libs.minecraft)
     compileOnly(libs.mixin)
     compileOnly(libs.asm.tree)
 
     compileOnly(libs.faststats.modding)
+    faststats(libs.faststats.modding)
 
     // All the different compatible mods.              // [PREFIX] - [PACKAGE] - [LINK]
     compileOnly("curse.maven:project-1455610:8521863") // Wurst* - net.wimods - https://www.curseforge.com/minecraft/mc-mods/wi-freecam
@@ -25,4 +30,10 @@ dependencies {
     compileOnly("maven.modrinth:T1E4i1qj:id6o0lrn")    // CamTweaks* - cameratweaks - https://modrinth.com/mod/cameratweaks
     compileOnly("maven.modrinth:XeEZ3fK2:OqDcTeQ8")    // Xolt* - net.xolt - https://modrinth.com/mod/freecam
     compileOnly("maven.modrinth:iPcmjKj7:ICsOm6bd")    // CamEnhance* - me.syflog.camenh - https://modrinth.com/mod/camenh
+}
+
+tasks.processResources {
+    from(faststats) {
+        into("jars")
+    }
 }
