@@ -4,7 +4,9 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "EntityMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "ServerTickRateManagerMixin",
+    "TickRateManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
