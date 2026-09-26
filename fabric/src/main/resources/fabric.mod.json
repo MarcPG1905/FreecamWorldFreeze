@@ -44,8 +44,9 @@
     "fabric-api": "*"
   },
   "recommends": {
-    "modmenu": "*",
-
+    "modmenu": "*"
+  },
+  "suggests": {
     "camenh": "*",
     "cameratweaks": "*",
     "easy-freecam": "*",
