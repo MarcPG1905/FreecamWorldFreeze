@@ -31,9 +31,3 @@ dependencies {
     compileOnly("maven.modrinth:XeEZ3fK2:OqDcTeQ8")    // Xolt* - net.xolt - https://modrinth.com/mod/freecam
     compileOnly("maven.modrinth:iPcmjKj7:ICsOm6bd")    // CamEnhance* - me.syflog.camenh - https://modrinth.com/mod/camenh
 }
-
-tasks.processResources {
-    from(faststats) {
-        into("jars")
-    }
-}

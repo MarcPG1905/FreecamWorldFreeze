@@ -5,6 +5,8 @@ plugins {
 dependencies {
     compileOnly(project(":common"))
     compileOnly(libs.neoforge)
+
+    jarJar(libs.faststats.modding)
 }
 
 sourceSets.main.configure {

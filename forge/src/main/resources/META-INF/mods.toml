@@ -36,6 +36,13 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${modId}]]
+modId = "modding_faststats"
+mandatory = true
+versionRange = "[${faststatsVersion},)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies.${modId}]]
 modId = "freecam"
 mandatory = false
 versionRange = "[1,)"

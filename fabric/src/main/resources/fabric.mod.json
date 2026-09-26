@@ -32,18 +32,17 @@
     }
   ],
 
+  "jars": [
+    {
+      "file": "META-INF/jarjar/modding-${faststatsVersion}.jar"
+    }
+  ],
+
   "depends": {
     "minecraft": ">=${minMinecraftVersion}",
     "fabricloader": "*",
     "fabric-api": "*"
   },
-
-  "jars": [
-    {
-      "file": "jars/modding-${faststatsVersion}.jar",
-    }
-  ],
-
   "recommends": {
     "modmenu": "*",
 
